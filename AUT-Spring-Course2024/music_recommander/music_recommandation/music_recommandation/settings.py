@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "song_registration"
+    "song_registration",
+    "recommender_system",
+    "shezam_service",
 ]
 
 MIDDLEWARE = [

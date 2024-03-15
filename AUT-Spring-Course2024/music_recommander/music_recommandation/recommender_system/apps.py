@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class RecommanderSystemConfig(AppConfig):
+class RecommenderSystemConfig(AppConfig):
     default_auto_field = "django.db.models.BigAutoField"
-    name = "recommander_system"
+    name = "recommender_system"
