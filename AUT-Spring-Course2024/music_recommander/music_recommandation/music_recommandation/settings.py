@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -40,7 +41,14 @@ INSTALLED_APPS = [
     "song_registration",
     "recommender_system",
     "shezam_service",
+    "storages",
 ]
+
+STORAGES = {"default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}}
+AWS_S3_ENDPOINT_URL = os.getenv("LIARA_ENDPOINT")
+AWS_S3_ACCESS_KEY_ID = os.getenv("LIARA_ACCESS_KEY")
+AWS_S3_SECRET_ACCESS_KEY = os.getenv("LIARA_SECRET_KEY")
+AWS_STORAGE_BUCKET_NAME = os.getenv("LIARA_BUCKET_NAME")
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
