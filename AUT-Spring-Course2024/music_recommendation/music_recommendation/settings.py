@@ -133,7 +133,8 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 #django s3 configs
-STORAGES = {"default": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}}
+
+STORAGES = {"staticfiles": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage", 'LOCATION': 'static'}}
 AWS_S3_ENDPOINT_URL = os.getenv("LIARA_ENDPOINT")
 AWS_S3_ACCESS_KEY_ID = os.getenv("LIARA_ACCESS_KEY")
 AWS_S3_SECRET_ACCESS_KEY = os.getenv("LIARA_SECRET_KEY")
