@@ -14,3 +14,9 @@ class MusicRequestView(APIView):
     def post(self,request):
         
         return Response({"": ""}, status=200)
+
+#this api vie will help user to find specific url of song request api
+class RegisterApiMainView(APIView):
+    
+    def get(self,request):
+        return Response({"warning": "song register system url: https://music-recommender-cloud.liara.run/register/song/"}, status=300)
