@@ -40,7 +40,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "song_registration",
     "storages",
+    "rest_framework"
 ]
 
 MIDDLEWARE = [
@@ -126,7 +128,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -135,7 +136,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 #django s3 configs
 
-STORAGES = {"staticfiles": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage", 'LOCATION': 'static'}}
+#STORAGES = {"staticfiles": {"BACKEND": "storages.backends.s3boto3.S3Boto3Storage"}}
 AWS_S3_ENDPOINT_URL = os.getenv("LIARA_ENDPOINT")
 AWS_S3_ACCESS_KEY_ID = os.getenv("LIARA_ACCESS_KEY")
 AWS_S3_SECRET_ACCESS_KEY = os.getenv("LIARA_SECRET_KEY")
