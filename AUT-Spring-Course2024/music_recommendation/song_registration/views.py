@@ -39,20 +39,22 @@ class MusicRequestView(generics.CreateAPIView):
             url = upload_to_server(music_file = song_file,song_id = request_id)
 
             if(url):
-                return Response({"1": "1"}, status=200)
+
+                #sending confirmation email
+                mailgun_service(email = "abtinzandi@gmail.com" , message= "hi, your request is registered successfully")
+                return Response({"message": "your request is registered successfully"}, status=200)
+                
             else:
-                return Response({"2": "2"}, status=200)
+                return Response({"message": "some errors from cloud systems"}, status=500)
         else:
-            pass
+            return Response({"message": "please complete the fields"}, status=400)
 
-
-        return Response({"": ""}, status=200)
 
 #this api vie will help user to find specific url of song request api
 class RegisterApiMainView(APIView):
     
     def get(self,request):
-        print(mailgun_service(email = "abtinzandi@gmail.com" , message= "test hello"))
+       
         return Response({"warning": "song register system url: https://music-recommender-cloud.liara.run/register/song/"}, status=300)
     
 class GetSongRequestsView(generics.RetrieveAPIView):
