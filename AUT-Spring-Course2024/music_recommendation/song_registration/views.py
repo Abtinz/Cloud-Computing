@@ -29,7 +29,11 @@ class MusicRequestView(generics.CreateAPIView):
 
             #uploading the request and song to the server
             request_id =song_request['id']
-            file=request.data['image']
+            song_file=request.data['song_file']
+
+            print(request_id)
+            print(song_file)
+            
         else:
             pass
 
