@@ -6,7 +6,7 @@ from .models import SongRequests
 from .serializers import SongRequestsSerializer,AddSongRequestsSerializer
 from music_recommendation.S3_helper import upload_to_server ,create_song_url
 import requests
-from rest_framework import generics
+from rest_framework import generics , status
 
 class MusicRequestView(generics.CreateAPIView):
     serializer_class=AddSongRequestsSerializer
@@ -52,3 +52,24 @@ class RegisterApiMainView(APIView):
     
     def get(self,request):
         return Response({"warning": "song register system url: https://music-recommender-cloud.liara.run/register/song/"}, status=300)
+    
+class GetSongRequestsView(generics.RetrieveAPIView):
+
+    serializer_class=SongRequestsSerializer
+    queryset=SongRequests.objects.all()
+    
+    '''
+    this method will show our song requests status and their data
+        args -> id is needed for finding the song trough the database query
+    '''
+    def get(self,request,id):
+       
+        add=get_object_or_404(SongRequests,id=id)
+        serializer=SongRequestsSerializer(add)
+        data=serializer.data
+        if(data['status']=="done" or data['status']=="ready"):
+            return Response(data,status=status.HTTP_200_OK)
+        elif (data['status']=="pending"):
+            return Response({"message":"song recognition is pending"},status=status.HTTP_202_ACCEPTED)
+        
+        return Response({"message":"your song recognition is rejected"},status=status.HTTP_403_FORBIDDEN)
