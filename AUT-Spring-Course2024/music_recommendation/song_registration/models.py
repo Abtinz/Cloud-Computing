@@ -14,7 +14,4 @@ class SongRequests(models.Model):
     song_id = models.CharField(max_length=255, blank=True, null=True)
     song_url = models.CharField(max_length=500,blank=True,null=True)
 
-    def __str__(self):
-        return self.song_id + "//" + self.email
-
     

@@ -41,9 +41,9 @@ class MusicRequestView(generics.CreateAPIView):
             if(url):
                 #saving the s3 file url
                 add=SongRequests.objects.get(id=request_id)
-                add.song_url="https://music-recommander.storage.iran.liara.space/" + str(request_id)
+                add.song_url =f"https://music-recommander.storage.iran.liara.space/{request_id}"
                 add.save()
-                print(add)
+                print(add.song_url)
                 #call the second service from celery
                 #second_service_task.delay(add_id,request.data["email"])
                 #sending confirmation email
