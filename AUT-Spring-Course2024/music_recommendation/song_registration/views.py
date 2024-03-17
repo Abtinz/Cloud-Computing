@@ -34,6 +34,13 @@ class MusicRequestView(generics.CreateAPIView):
             print(request_id)
             print(song_file)
             
+            #saving the music file and request id in s3 cloud
+            url = upload_to_server(music_file = song_file,song_id = request_id)
+
+            if(url):
+                return Response({"1": "1"}, status=200)
+            else:
+                return Response({"2": "2"}, status=200)
         else:
             pass
 
