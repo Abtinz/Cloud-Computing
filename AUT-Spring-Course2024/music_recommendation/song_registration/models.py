@@ -10,7 +10,7 @@ class SongRequests(models.Model):
 
     id=models.AutoField(primary_key=True)
     email = models.EmailField()
-    status = models.CharField(choices=['pending', 'failure', 'ready','done'], default='pending')
+    status = models.CharField(max_length=20, choices=[('pending', 'Pending'), ('failure', 'Failure'), ('ready', 'Ready'), ('done', 'Done')], default='pending')
     song_id = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
