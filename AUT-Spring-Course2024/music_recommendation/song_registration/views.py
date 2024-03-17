@@ -39,7 +39,13 @@ class MusicRequestView(generics.CreateAPIView):
             url = upload_to_server(music_file = song_file,song_id = request_id)
 
             if(url):
-
+                #saving the s3 file url
+                add=SongRequests.objects.get(id=request_id)
+                add.song_url="https://music-recommander.storage.iran.liara.space/" + str(request_id)
+                add.save()
+                print(add)
+                #call the second service from celery
+                #second_service_task.delay(add_id,request.data["email"])
                 #sending confirmation email
                 mailgun_service(email = "abtinzandi@gmail.com" , message= "hi, your request is registered successfully")
                 return Response({"message": "your request is registered successfully"}, status=200)
