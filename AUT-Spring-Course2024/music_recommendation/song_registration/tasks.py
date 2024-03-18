@@ -9,18 +9,14 @@ from song_registration.models import SongRequests
 def process_music_recognition(request_id):
     global music_request
     try:
-        music_request = SongRequests.objects.get(id=request_id)
-        
+        print(request_id)
+        music_request = SongRequests.objects.get(id=request_id) 
         spotify_id = shezam_api(music_request.audio_file.path)
-
-        recommendations = spotify_recommendation_system(spotify_id, "", "")
-        formatted_recommendations = format_recommendations(recommendations)
-        
-        mailgun_service(email = music_request.email , message= formatted_recommendations)
-
+        print(spotify_id)
         music_request.song_id = spotify_id
         music_request.status = 'ready'
         music_request.save()
+        process_recommendations.delay()
 
     except Exception as error:
         music_request.status = 'failure'
@@ -39,10 +35,42 @@ def format_recommendations(recommendations):
 def process_recommendations():
     ready_requests = SongRequests.objects.filter(status='ready')
     for music_request in ready_requests:
-        recommendations = spotify_recommendation_system(music_request.song_id, "", "")
-        formatted_recommendations = format_recommendations(recommendations)
-        
-        mailgun_service(email = music_request.email , message= formatted_recommendations)
 
+        recommendations = spotify_recommendation_system(music_request.song_id, "", "")
+        print(recommendations)
         music_request.status = 'done'
         music_request.save()
+        
+
+def music_recognition(request_id):
+    global music_request
+    try:
+        print(request_id)
+        music_request = SongRequests.objects.get(id=request_id) 
+        spotify_id = shezam_api(music_request.song_url)
+        print(spotify_id)
+        music_request.song_id = spotify_id
+        music_request.status = 'ready'
+        music_request.save()
+        recommendations()
+
+    except Exception as error:
+        music_request.status = 'failure'
+        music_request.save()
+        raise error
+
+
+def recommendations():
+    ready_requests = SongRequests.objects.filter(status='ready')
+    for music_request in ready_requests:
+
+        recommendations = spotify_recommendation_system(music_request.song_id, "", "")
+        if recommendations:
+            music_request.status = 'done'
+            music_request.save()
+        else:
+           music_request.status = 'failure'
+           music_request.save() 
+            
+
+        

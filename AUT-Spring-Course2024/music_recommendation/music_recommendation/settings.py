@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "song_registration",
     "storages",
-    "rest_framework"
+    "rest_framework",
+    "django_celery_results",
+    "django_filters"
 ]
 
 MIDDLEWARE = [

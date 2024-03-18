@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.views import APIView
+
+from song_registration.tasks import music_recognition, process_music_recognition
 from .models import SongRequests
 from .serializers import SongRequestsSerializer,AddSongRequestsSerializer
 from music_recommendation.S3_helper import upload_to_server ,create_song_url
@@ -43,11 +45,12 @@ class MusicRequestView(generics.CreateAPIView):
                 add=SongRequests.objects.get(id=request_id)
                 add.song_url =f"https://music-recommander.storage.iran.liara.space/{request_id}"
                 add.save()
-                print(add.song_url)
-                #call the second service from celery
-                #second_service_task.delay(add_id,request.data["email"])
+                
+                #process_music_recognition.delay(request_id)
+                music_recognition(request_id)
                 #sending confirmation email
                 mailgun_service(email = "abtinzandi@gmail.com" , message= "hi, your request is registered successfully")
+
                 return Response({"message": "your request is registered successfully"}, status=200)
                 
             else:
@@ -82,6 +85,6 @@ class GetSongRequestsView(generics.RetrieveAPIView):
         elif (data['status']=="pending"):
             return Response({"message":"song recognition is pending"},status=status.HTTP_202_ACCEPTED)
         elif (data['status']=="ready"):
-            return Response({"message":"song ID is ready, recommendation system started! "},status=status.HTTP_202_ACCEPTED)
+            return Response({"message":"song ID is ready, recommendation system started!"},status=status.HTTP_202_ACCEPTED)
         
         return Response({"message":"your song recognition is rejected"},status=status.HTTP_403_FORBIDDEN)
