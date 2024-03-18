@@ -25,6 +25,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "django-insecure-!qp4l!lnhz=i*h7o#r_oz=zr#$m#-7noa*g6=z4n733^k2j=8_"
 
+CELERY_BROKER_URL = 'amqps://eibpuqvj:dJ6oEE2UxYdVpYGMUfMxG8zxmx0qk4W-@codfish.rmq.cloudamqp.com/eibpuqv'
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 

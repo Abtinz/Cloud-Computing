@@ -77,9 +77,11 @@ class GetSongRequestsView(generics.RetrieveAPIView):
         add=get_object_or_404(SongRequests,id=id)
         serializer=SongRequestsSerializer(add)
         data=serializer.data
-        if(data['status']=="done" or data['status']=="ready"):
+        if(data['status']=="done"):
             return Response(data,status=status.HTTP_200_OK)
         elif (data['status']=="pending"):
             return Response({"message":"song recognition is pending"},status=status.HTTP_202_ACCEPTED)
+        elif (data['status']=="ready"):
+            return Response({"message":"song ID is ready, recommendation system started! "},status=status.HTTP_202_ACCEPTED)
         
         return Response({"message":"your song recognition is rejected"},status=status.HTTP_403_FORBIDDEN)
