@@ -1,5 +1,4 @@
-FROM python:3.10.9
-
+FROM python:3.9.19-alpine
 #this is how we set working directory for our container
 WORKDIR /usr/src/app
 
