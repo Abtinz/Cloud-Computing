@@ -17,8 +17,9 @@ services:
     environment:
       - ELASTIC_PASSWORD=12345
 
-  python:
-    build: "/home/movies/search/"
+  flask_app:
+    build: "/"
+    image: flask_app
     ports:
       - "5000:5000"
     depends_on:
