@@ -19,7 +19,7 @@ services:
 
   flask_app:
     build: "/"
-    image: flask_app
+    image: flask_main
     ports:
       - "5000:5000"
     depends_on:

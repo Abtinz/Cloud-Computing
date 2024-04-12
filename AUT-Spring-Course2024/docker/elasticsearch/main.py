@@ -4,7 +4,7 @@ from flask import Flask, abort, request, jsonify
 app = Flask(__name__)
 
 
-@app.route('movies/search', methods=['GET'])
+@app.route('/movies/search', methods=['GET'])
 def search_query():
 
     try:
@@ -19,9 +19,9 @@ def search_query():
 
 
 if __name__ == '__main__':
-    time.sleep(50)
+    
 
     #initializing the cache system and elastic database, then we will run flask app on 0.0.0.0:5000(no need to debug mode)
 
-    time.sleep(50)
+    
     app.run(debug=False, host='0.0.0.0', port=5000)
