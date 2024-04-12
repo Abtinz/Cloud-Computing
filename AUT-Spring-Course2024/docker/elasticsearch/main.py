@@ -1,9 +1,21 @@
 import time
-from flask import Flask, request, jsonify
+from flask import Flask, abort, request, jsonify
 
 app = Flask(__name__)
 
 
+@app.route('movies/search', methods=['GET'])
+def search_query():
+
+    try:
+
+        query = request.args.get('query')
+
+        if query is None:
+            return abort(400,{'message': 'bad request caused by incorrect and incomplete request queries'})
+        
+    except Exception as error:
+        return abort(400,{'message': 'bad request caused by incorrect and incomplete request queries'})
 
 
 if __name__ == '__main__':
