@@ -1,3 +1,4 @@
+import os
 import redis
 
 '''
@@ -6,8 +7,9 @@ import redis
 '''
 class RedisCacheSystem:
     def __init__(self):
-        self.cache = redis.Redis(host='redis', port=6379)
-        print('redis is ready on :6379')
+        redis_host = os.environ.get('REDIS_HOST', 'localhost') 
+        self.cache = redis.Redis(host=redis_host, port=6379)
+        print(f'redis is ready on {redis_host}:6379')
 
     def find(self, query):
         print(f"redis is searching for {query}")

@@ -8,7 +8,7 @@ ELASTIC_PASSWORD = '12345'
 
 
 def elasticsearch_initializing():
-    url = 'https://elasticsearch:9200/_bulk?pretty'
+    url = 'https://elasticsearch:9200/bulk?pretty'
     json_file = 'movies.json'
 
     headers = {
@@ -29,14 +29,15 @@ def elasticsearch_initializing():
 
 class ElasticSearchService:
     def __init__(self):
-        self.db = Elasticsearch("https://elasticsearch:9200", http_auth=(ELASTIC_USERNAME, ELASTIC_PASSWORD), verify_certs=False)
+        self.db = Elasticsearch("https://elasticsearch:9200", http_auth=(ELASTIC_USERNAME, ELASTIC_PASSWORD))
+        print(f"connected to elasticsearch service {self.db.ping()}")
         if self.db.ping():
-            print(f"connected to elasticsearch service {self.db.ping()}")
+            print(f"connected to elasticsearch service")
 
-    def search(self, term):
-        result = self.db.search(index='_all', body={"query": {"match": {"Series_Title": term}}})
+    def search(self, name):
+        result = self.db.search(index='_all', body={"query": {"match": {"Series_Title": name}}})
         output = [hit['_source'] for hit in result['hits']['hits']]
         if output:
-            return output, True
+            return output
         else:
-            return None, False
+            return None
