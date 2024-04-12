@@ -6,7 +6,7 @@ import requests
 '''
 def second_service(query):
     
-    
+    print("second api process is started ....")
     url = f"https://imdb-search2.p.rapidapi.com/%{query}%7D"
 
     headers = {
@@ -21,5 +21,5 @@ def second_service(query):
 
 if __name__ == '__main__':
     #lets test our api
-    print(second_service("berd"))
+    print(second_service("seven"))
 
