@@ -6,7 +6,6 @@ from second_service import second_service
 
 app = Flask(__name__)
 
-
 @app.route('/movies/search', methods=['GET'])
 def search_query():
 
@@ -58,7 +57,7 @@ def search_query():
     except Exception as error:
         print(error)
         try:
-           
+            #we may have problems in redis or elasticsearch services
             api_info = second_service(query)
 
             if api_info and len(api_info) != 0:
@@ -72,17 +71,14 @@ def search_query():
             return abort(404,{'message': 'no results for given name in imdb, elasticsearch system and redis'})
 
         except Exception as error2:
+
             print(error2)
-            return abort(500,{'message': 'bad request caused by incorrect and incomplete request queries'})
+            return abort(500,{'message': str(error)})
         
-
-
 
 if __name__ == '__main__':
     
     #initializing the redis cache system and elastic database, then we will run flask app on 0.0.0.0:5000(no need to debug mode)
     cache_system = RedisCacheSystem()
-    #elasticsearch_initializing()
     search_system = ElasticSearchService()
-   
     app.run(debug=False, host='0.0.0.0', port=5000)
