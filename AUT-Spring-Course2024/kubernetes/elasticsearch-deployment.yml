@@ -26,4 +26,4 @@ spec:
           value: "12345"
         resources:
           limits:
-            memory: 2Gi
+            memory: 4Gi

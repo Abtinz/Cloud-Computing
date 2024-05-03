@@ -80,5 +80,6 @@ if __name__ == '__main__':
     
     #initializing the redis cache system and elastic database, then we will run flask app on 0.0.0.0:5000(no need to debug mode)
     cache_system = RedisCacheSystem()
+    #initialize_database()
     search_system = ElasticSearchService()
     app.run(debug=False, host='0.0.0.0', port=5000)

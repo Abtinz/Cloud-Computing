@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  database_url: "http://elasticsearch-service:9200"
+  redis_url: "redis-service:6379"
