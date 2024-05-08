@@ -1,5 +1,3 @@
-#here we are specifying the 
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -19,6 +17,7 @@ spec:
         image: elasticsearch:8.12.2
         ports:
         - containerPort: 9200
+        - containerPort: 9300
         env:
         - name: discovery.type
           value: single-node
