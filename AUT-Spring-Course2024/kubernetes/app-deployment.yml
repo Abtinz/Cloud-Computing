@@ -1,26 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: python
+  name: flask-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: python
+      app: flask-app
   template:
     metadata:
       labels:
-        app: python
+        app: flask-app
     spec:
       containers:
-      - name: python
-        image: flask_app:latest
+      - name: abtin-server
+        image: abtinzandi/cc-hw2-part3:v1.0
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5000
-        volumeMounts:
-        - name: elasticsearch-pvc
-          mountPath: /root/kuberfinal/redis
-      volumes:
-      - name: elasticsearch-pvc
-        persistentVolumeClaim:
-          claimName: elasticsearch-pvc
+        env:
+        - name: MY_POD_NAME
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
