@@ -13,14 +13,14 @@ spec:
         app: redis
     spec:
       containers:
-        - name: redis
-          image: redis
-          ports:
-            - containerPort: 6379
-          volumeMounts:
-            - mountPath: "/data"
-              name: redis-storage
+      - name: redis
+        image: redis:latest
+        ports:
+        - containerPort: 6379
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
       volumes:
-        - name: redis-storage
-          persistentVolumeClaim:
-            claimName: redis-pvc
+      - name: redis-data
+        persistentVolumeClaim:
+          claimName: redis-pvc
