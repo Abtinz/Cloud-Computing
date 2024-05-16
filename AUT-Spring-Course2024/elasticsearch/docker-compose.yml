@@ -19,6 +19,18 @@ services:
       resources:
         limits:
           memory: 4G
+    
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.13.2
+    ports:
+      - "5601:5601"
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=12345
+    depends_on:
+      - elasticsearch
 
   flask_app:
     build: "/"
