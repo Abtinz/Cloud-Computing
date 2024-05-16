@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: abtin-server
-        image: abtinzandi/cc-hw2-part3:v1.0
+        image: abtinzandi/cc-hw2-part3:v3.0
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 5000
