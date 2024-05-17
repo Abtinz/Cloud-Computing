@@ -6,4 +6,13 @@ cd AUT-Spring-Course2024\kubernetes\configs
 
 kubectl apply -f .
 
+cd AUT-Spring-Course2024\kubernetes\service
+
 cmd : curl -XPOST -k -u elastic:12345 "https://localhost:9200/_bulk?pretty" -H "Content-Type: application/json" --data-binary @movies.json
+
+# you should use your elastic search port after port forwarding 
+
+cd AUT-Spring-Course2024\kubernetes\configs
+
+kubectl get pods
+
