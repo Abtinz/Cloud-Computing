@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: elasticsearch
+  name: elasticsearch-deployment
 spec:
   replicas: 3
   selector:
@@ -24,4 +24,4 @@ spec:
           value: "12345"
         resources:
           limits:
-            memory: 4Gi
+            memory: 1Gi

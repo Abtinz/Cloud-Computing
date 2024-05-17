@@ -16,3 +16,7 @@ cd AUT-Spring-Course2024\kubernetes\configs
 
 kubectl get pods
 
+kubectl get DEPLOYMENTS
+
+kubectl get services
+
