@@ -80,10 +80,10 @@ def search_query():
             print(error2)
             return abort(500,{'message': str(error)})
         
-@app.route("/home")
+@app.route("/loadbalancer")
 def pod_detector():
-    pod_name = os.environ.get('MY_POD_NAME', 'Unknown pod')
-    return f'Current Pod info: {pod_name}'
+    pod = os.environ.get('MY_POD_NAME', '')
+    return f'LoadBalancer:= Current Pod name: {pod}'
 
 if __name__ == '__main__':
     
