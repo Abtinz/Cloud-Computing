@@ -3,5 +3,7 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  database_url: "http://elasticsearch-service:9200"
-  redis_url: "redis-service:6379"
+    elasticsearch_host: "10.98.189.42"
+    elasticsearch_port: "9200"
+    redis_host: "10.96.3.98"
+    redis_port: "6379"
