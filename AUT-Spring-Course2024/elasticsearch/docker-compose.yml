@@ -10,9 +10,9 @@ services:
     image: elasticsearch:8.12.2
     ports:
       - "9200:9200"
-      - "9300:9300"  # Adding the second port mapping as per the Docker run command
+      - "9300:9300" 
     environment:
-      - discovery.type=single-node  # Important for single-node setups in Elasticsearch
+      - discovery.type=single-node
       - ELASTIC_PASSWORD=12345
       - "ES_JAVA_OPTS=-Xms2g -Xmx2g"  # Set Java options if needed for memory management
     deploy:
@@ -36,7 +36,7 @@ services:
     build: "/"
     image: flask_main:v1.0
     ports:
-      - "5000:5000"
+      - "5001:5001"
     depends_on:
       - redis
       - elasticsearch
