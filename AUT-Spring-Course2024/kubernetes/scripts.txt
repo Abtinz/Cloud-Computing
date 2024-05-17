@@ -20,3 +20,7 @@ kubectl get DEPLOYMENTS
 
 kubectl get services
 
+kubectl describe svc elasticsearch
+
+kubectl describe svc redis
+
