@@ -16,8 +16,8 @@ def second_service(query):
 
     response = requests.get(url, headers=headers)
     print(response.json())
+    print("second api process found results....")
     return response.json()
-
 
 if __name__ == '__main__':
     #lets test our api

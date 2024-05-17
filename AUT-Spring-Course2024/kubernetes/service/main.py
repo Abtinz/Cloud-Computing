@@ -40,6 +40,9 @@ def search_query():
                 }) , 200
             
             else:
+
+                print("elasticsearch does not have needed data for this query ...")
+
                 #now we have to call our second api
                 api_info = second_service(query)
 
@@ -57,6 +60,8 @@ def search_query():
     except Exception as error:
         print(error)
         try:
+            
+            print("we have confronted with an error in elasticsearch or redis system... \n lets try second service for last chance")
             #we may have problems in redis or elasticsearch services
             api_info = second_service(query)
 
@@ -75,15 +80,14 @@ def search_query():
             print(error2)
             return abort(500,{'message': str(error)})
         
-@app.route("home/")
+@app.route("/home")
 def pod_detector():
-    pod_name = os.environ.get('MY_POD_NAME', 'Unknown')
+    pod_name = os.environ.get('MY_POD_NAME', 'Unknown pod')
     return f'Current Pod info: {pod_name}'
 
 if __name__ == '__main__':
     
     #initializing the redis cache system and elastic database, then we will run flask app on 0.0.0.0:5000(no need to debug mode)
     cache_system = RedisCacheSystem()
-    #initialize_database()
     search_system = ElasticSearchService()
     app.run(debug=False, host='0.0.0.0', port=5000)
