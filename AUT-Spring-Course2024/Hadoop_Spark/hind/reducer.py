@@ -14,8 +14,8 @@ import sys
 
 inverted_index = defaultdict(set)
 
-for line in sys.stdin:
-    value, document_id = line.strip().split('\t')
+for document in sys.stdin:
+    value, document_id = document.strip().split('\t')
     inverted_index[value].add(document_id)
 
 #now lets map words and their keys
