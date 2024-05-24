@@ -7,3 +7,17 @@ The input lines are expected to be sorted by the word. The reducer uses this sor
 aggregate document IDs by using a set data structure, transitioning between different words as it processes
 the input lines one-by-one.
 """
+
+#we will use defaultdict for saving key values in reduce phase
+from collections import defaultdict
+import sys
+
+inverted_index = defaultdict(set)
+
+for line in sys.stdin:
+    value, document_id = line.strip().split('\t')
+    inverted_index[value].add(document_id)
+
+#now lets map words and their keys
+for word, document_id_sets in inverted_index.items():
+    print(f"{word}\t{', '.join(document_id_sets)}")
