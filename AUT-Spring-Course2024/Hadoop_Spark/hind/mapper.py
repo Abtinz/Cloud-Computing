@@ -6,10 +6,11 @@ Each word is emitted only once per document to ensure uniqueness.
 
 import sys
 
-for line in sys.stdin:
-    document_id, text = line.split(',')
-    #here we will find each word of each document
-    words = text.split()
+for document in sys.stdin:
+    document_id, line = document.strip().split(',')
     
-    for word in words:
-        print(f'{document_id}\t{word}')
+    #here we will find each word of each document
+    text = line.split()
+  
+    for word in text:
+        print(f"{word}\t{document_id}")
