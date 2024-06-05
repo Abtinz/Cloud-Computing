@@ -5,6 +5,12 @@
 
 Purpose for this tutorial is to show how to get started with Hadoop, Spark and Jupyter for your BigData solution, deployed as Docker Containers.
 
+thanks to sadegh mohamadi and mohammad rahmanian for docker and .yml and .sh configs
+
+## Windows?
+
+Don't forget to make .sh files configured for execution on unix systems
+
 ## Pre-requisite
 - Apple Silicon might use arm64 branch to install.
 - Ensure Docker is installed.
