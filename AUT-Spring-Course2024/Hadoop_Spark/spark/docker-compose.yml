@@ -110,16 +110,16 @@ services:
       - spark-master
   
   ####### JUPYTER
-  jupyter-notebook:
-    build: ./jupyter
-    container_name: jupyter-notebook
-    ports:
-      - 8888:8888
-      - 4040:4040
-    networks:
-     - bds-network
-    volumes:
-      - shared-workspace:/opt/workspace
+#  jupyter-notebook:
+#    build: ./jupyter
+#    container_name: jupyter-notebook
+#    ports:
+#      - 8888:8888
+#      - 4040:4040
+#    networks:
+#     - bds-network
+#    volumes:
+#      - shared-workspace:/opt/workspace
 
 volumes:
   hadoop_namenode:
