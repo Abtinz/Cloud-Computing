@@ -1,0 +1,88 @@
+version: '3.8' 
+
+#definnig cassandra's network
+networks: 
+ 
+  cassandra: 
+
+#here we are going to declear three cluster of cassandra 
+services: 
+ 
+  firt-cassandra-service: 
+ 
+    image: cassandra:latest 
+ 
+    container_name: firt-cassandra-service
+ 
+    hostname: firt-cassandra-service 
+ 
+    networks: 
+ 
+      - cassandra 
+ 
+    ports: 
+ 
+      - "9042:9042" 
+ 
+    environment: &environment  
+ 
+        CASSANDRA_SEEDS: "firt-cassandra-service,second-cassandra-service"   
+ 
+        CASSANDRA_CLUSTER_NAME: MyTestCluster 
+ 
+        CASSANDRA_DC: DC1 
+ 
+        CASSANDRA_RACK: RACK1 
+ 
+        CASSANDRA_ENDPOINT_SNITCH: GossipingPropertyFileSnitch 
+ 
+        CASSANDRA_NUM_TOKENS: 128 
+
+  #second cassandra
+  second-cassandra-service: 
+ 
+    image: cassandra:latest 
+ 
+    container_name: second-cassandra-service 
+ 
+    hostname: second-cassandra-service 
+ 
+    networks: 
+ 
+      - cassandra 
+ 
+    ports: 
+ 
+      - "9043:9042" 
+ 
+    environment: *environment   
+ 
+    depends_on: 
+ 
+      firt-cassandra-service:  
+ 
+        condition: service_started 
+ 
+  third-cassandra-service: 
+ 
+    image: cassandra:latest 
+ 
+    container_name: third-cassandra-service 
+ 
+    hostname: second-cassandra-service 
+ 
+    networks: 
+ 
+      - cassandra 
+ 
+    ports: 
+ 
+      - "9044:9042" 
+ 
+    environment: *environment   
+ 
+    depends_on: 
+ 
+      second-cassandra-service:   
+ 
+        condition: service_started
