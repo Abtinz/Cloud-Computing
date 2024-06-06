@@ -1,6 +1,5 @@
 from cassandra.cluster import Cluster
 from cassandra.auth import PlainTextAuthProvider
-from cassandra.policies import DCAwareRoundRobinPolicy
 
 conn_timeout_ms = 4000
 auth_provider = PlainTextAuthProvider(username='cassandra', password='password')
