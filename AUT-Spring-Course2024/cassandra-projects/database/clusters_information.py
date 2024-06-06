@@ -15,4 +15,4 @@ for keyspace in metadata.keyspaces:
 
 print("\nNodes in the cluster:")
 for host in metadata.all_hosts():
-    print(f"Host: {host.address}, Rack: {host.rack}, Datacenter: {host.datacenter}")
+    print(f"Host: {host.address}, Rack: {host.rack}, Data center: {host.datacenter}")

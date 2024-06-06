@@ -17,5 +17,4 @@ WITH replication = {
 session.execute(create_keyspace_query)
 print("Keyspace 'shop' created successfully.")
 
-
 session = cluster.connect('shop')

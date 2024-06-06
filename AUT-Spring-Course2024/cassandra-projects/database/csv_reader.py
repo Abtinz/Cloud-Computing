@@ -11,7 +11,7 @@ session = cluster.connect('shop')
 
 # Path to your CSV file
 file_path = 'AUT-Spring-Course2024\cassandra-projects\database\SampleCSVFile_10600kb.csv'
-limitation = 1000
+limitation = 100
 # Open the CSV file and insert data into the table
 with open(file_path, mode='r') as file:
     reader = csv.reader(file)
