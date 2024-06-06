@@ -3,7 +3,7 @@ pip install -r requirements.txt
 docker pull cassandra
 
 #for test
-docker run --rm -d --name cassandra-db cassandra:latest
+docker run --rm -d --name cassandra-db  -p 9042:9042 cassandra:latest
 
 docker ps
 
@@ -18,4 +18,4 @@ docker exec -it firt-cassandra-service nodetool info
 docker exec -it second-cassandra-service nodetool info
 docker exec -it third-cassandra-service nodetool info
 
-docker-compose dwon
+docker-compose down
