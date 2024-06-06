@@ -8,7 +8,6 @@ docker ps
 docker stop cassandra-db
 
 #lets fire the clusters
-cd cassandra_cluster
 docker compose up -d
 docker ps
 #cluster niformation
