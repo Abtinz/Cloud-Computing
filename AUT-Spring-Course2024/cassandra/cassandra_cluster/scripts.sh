@@ -1,5 +1,3 @@
-pip install -r requirements.txt
-
 docker pull cassandra
 
 #for test
