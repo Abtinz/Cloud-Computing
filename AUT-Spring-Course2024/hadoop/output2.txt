@@ -1,0 +1,10 @@
+doc1    in      3
+doc10   and     2
+doc2    is      3
+doc3    automation      2
+doc4    security        2
+doc5    energy  5
+doc6    digital 2
+doc7    in      2
+doc8    Architectural   1
+doc9    analytics       2
