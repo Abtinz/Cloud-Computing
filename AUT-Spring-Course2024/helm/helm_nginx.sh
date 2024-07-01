@@ -10,3 +10,6 @@ helm repo update
 helm install nginx-ingress ingress-nginx/ingress-nginx
 
 kubectl get service --namespace default nginx-ingress-ingress-nginx-controller --output wide --watch
+
+#external ip
+kubectl get svc --namespace default -l app.kubernetes.io/name=ingress-nginx
