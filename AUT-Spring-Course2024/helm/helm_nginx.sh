@@ -1,5 +1,9 @@
 curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
 
+helm version
+
+minikube start
+
 #nginx
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
 helm repo update
